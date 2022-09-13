@@ -17,6 +17,7 @@ void draw(){
 
 void paddles(){
   fill(10,75,0);
+  stroke(255);
   rect(50,Lrect,150,500);
   rect(600,Rrect,150,500); 
 }

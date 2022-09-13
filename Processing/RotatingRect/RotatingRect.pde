@@ -4,6 +4,7 @@ float h=0;
 void setup(){
   size(300,300);
   rectMode(CENTER);
+  frameRate(30);
   colorMode(HSB,100);
   h=random(100);
   background(h,50,h);
