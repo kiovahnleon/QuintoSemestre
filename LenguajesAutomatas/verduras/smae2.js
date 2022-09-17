@@ -254,15 +254,15 @@ const verduras = {
 
 
 
-const datos = verduras.SMAE.filter((element) => /picada/.test(element.Alimento))
+const datos = verduras.SMAE.filter((element) => /\bpicada\b/.test(element.Alimento))
 
 datos.forEach((element) => console.log(element.Alimento))
 
 /* const datos = verduras.SMAE.map(nombre => nombre.Alimento)
 
-const regexp = /(\w|\s)*picada(\w|\s)* /g 
+const regexp = /(\w|\s)*picada(\w|\s)* /g
 let match
 
-while ((match = regexp.exec(datos)) !== null) {
-  console.log(match[0]);
-} */
+while ((match = regexp.exec(datos))) {
+  console.log(match[0]); 
+}*/
