@@ -1,27 +1,40 @@
-//en comnsola
-const a = document.querySelector('#lista');
+const contain = document.querySelector('#resultados');
+let texto;
+const exp = /[\w\sáéíóú()+]*/;
+let alm = [];
 
-const buscar = (elemento) => {
-    a.innerHTML = '';
-    const valorEntrada = document.querySelector('#entrada').value;
-    elemento.preventDefault();
-    console.log(valorEntrada);
-    fetch("smae_base_datos.json")
-        .then((response) => response.json())
-        .then((data) => {
+async function buscar() {
+  const respuesta = await fetch('https://smae-5f163-default-rtdb.firebaseio.com/SMAE.json');
+  const data = await respuesta.json();
+  alm = data;
+}
+buscar();
 
-            const regex = new RegExp(`${valorEntrada}`, 'i')
-            const datos = data.SMAE.filter((cosa) => regex.test(cosa.Alimento))
+btn.onclick = (e) => {
+  e.preventDefault();
+  texto = document.querySelector('input').value;
+  const nombres = alm.map(data => data.Alimento)
+  const busqueda = new RegExp(exp.source + texto + exp.source, 'gi');
+  let match;
 
-            datos.forEach((pieza) => {
-                console.log(pieza.Alimento)
-                const mostrar = document.createElement('li');
-                mostrar.innerText = pieza.Alimento;
-                a.appendChild(mostrar);
-            })
+  document.getElementById("resultados").innerHTML = "";
 
+  while ((match = busqueda.exec(nombres))) {
+    const display = document.createElement('li');
+    display.innerText = match[0];
+    contain.appendChild(display);
+    //document.getElementById("resultados").innerHTML += match[0] + "\n";
+    console.log(match[0]);
+  }
 
-        });
 }
 
-document.querySelector('form').addEventListener('submit', buscar);
+
+//lo que puso la profe
+/* async function response() {
+    const respuesta = await fetch('https://smae-5f163-default-rtdb.firebaseio.com/SMAE.json');
+    const data = await respuesta.json();
+    console.log(data);
+}
+
+response(); */
